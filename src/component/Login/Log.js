@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import './Log.css'
+
+const Wrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  font-size: 23px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background:Silver;
+`;
+
 class Log extends Component{
   constructor(props){
     super(props);
@@ -24,7 +38,7 @@ class Log extends Component{
 
 render(){
   return(
-    <div className="log"> 
+    <Wrapper>
       <div className="main">
         <h2>Login</h2>
         <div className="row">
@@ -55,7 +69,7 @@ render(){
             <a className="reset" href="#" >Reset password</a>
         </div>
       </div>
-    </div>
+    </Wrapper>
 
   );
 }

@@ -14,7 +14,7 @@ export const Wrapper = styled.section`
 `;
 export const PopupLoginWrapper = styled.div`
     width: 15em;
-    background: #006699;
+    border: 1px solid black;
     border-radius: 0.2em;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ export const PopupLoginWrapper = styled.div`
 `;
 
 export const Text = styled.div`
-    color: ${props => props.color};
+    color: black;
     font-size: ${props => props.fontSize}px;
 `;
 
@@ -38,6 +38,7 @@ export const Row = styled.div`
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    padding-top: 20px;
 `;
 
 export const Input = styled.input`
@@ -46,7 +47,7 @@ export const Input = styled.input`
     height: 1.5em;
     border-radius: 0.2em;
     outline: none;
-    background: #a7a3a3;
+    background: #DDDDDD;
 `;
 
 export const Button = styled.button`
@@ -59,10 +60,14 @@ export const Button = styled.button`
     background: #50c0ce;
     border-radius: 0.35em;
     outline: none;
+    background: #0066CC;
+    color: white;
 `;
 
 export const Blank = styled.div`
     width: ${props => props.width}em;
     height: ${props => props.height}em;
 `;
-
+ export const Label = styled.div`
+    font-size: 16px;
+ `;
