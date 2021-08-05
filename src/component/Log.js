@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
+
 import {
     Wrapper, PopupLoginWrapper, Text, Row,
     Input, Button, Blank, Label, 
 } from './LogStyle';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+  useLocation,
+  useParams
+} from "react-router-dom";
 class Log extends Component{
     constructor(props) {
     super(props);
@@ -34,10 +44,12 @@ class Log extends Component{
     this.setState({ [input.name]: value });
   };
   login(){
+    
     const { MSV, passWord, rememberMe } = this.state;
     localStorage.setItem('rememberMe', rememberMe);
     localStorage.setItem('MSV', rememberMe ? MSV : '');
     localStorage.setItem('passWord', rememberMe ? passWord : '');
+
     if(!rememberMe){
     this.onClear();}
     console.log(this.state);
@@ -59,6 +71,7 @@ render(){
                 <Text color="#d3c8c8" fontSize={20}>Mã Sinh Viên</Text>
                 <Input className="input"
                 name="MSV"
+                required
                 value={this.state.MSV}
                 onChange={this.onChange}
               ></Input>
@@ -68,6 +81,7 @@ render(){
                 <Input className="input" 
                   type="password"
                   name="passWord"
+                  required
                   value={this.state.passWord}
                   onChange={this.onChange}>
                 </Input>
@@ -83,8 +97,9 @@ render(){
                      Remember me
                 </Label> 
             </Row>
-            <Button onClick={() => this.login()}
-            >Login</Button>
+            <Button onClick={() => this.login()}>
+              Login
+            </Button>
             <Label><a href="#">Reset password</a></Label>
             
         </PopupLoginWrapper>
