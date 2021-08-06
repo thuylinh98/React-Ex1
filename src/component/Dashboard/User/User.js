@@ -36,7 +36,8 @@ render(){
   return(
     <Wrapper>
       <Row>
-          <img  src= {this.state.avt} alt="avt"></img> 
+          <img //style="border-color: green;border-radius: 10px;border-style: solid;border-radius: 50px" 
+          src= {this.state.avt} alt="avt"></img> 
       </Row>
       <Row>
         <Text>{this.state.email}</Text>
