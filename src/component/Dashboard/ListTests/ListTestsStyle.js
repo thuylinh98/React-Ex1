@@ -1,46 +1,38 @@
 import styled from 'styled-components';
 export const Wrapper = styled.section`
     width: 100%;
+    display: flex;
+    flex-direction: column;
  `;
 
 export const Row = styled.div`
-width: 100%;
-box-sizing: border-box;
-padding-left: 1em;
-padding-right: 1em;
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-justify-content: flex-start;
-
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-items: baseline;
+    justify-content: space-between;
 `;
-export const ColumnLeft = styled.div`
-    float: left; 
-    width: 70%;
-   
-
-    
-`;
-export const ColumnRight = styled.div`
-    float: right; 
-    width: 20%;
-   
+export const Column = styled.div`    
 `;
 export const Input = styled.input`
-    width: 50%;
+    width: 70%;
     font-size: 16px;
-    height: 1.5em;
+    height: 2em;
     border-radius: 0.2em;
     outline: none;
     background: #DDDDDD;
 `;
 
 export const Button = styled.button`
-    width: 7em;
+    width: 5em;
     margin-top: 2em;
     font-size: 14px;
     font-weight: bold;
-    height: 2.2em;
+    height: 2em;
     cursor: pointer;
     background: #50c0ce;
     border-radius: 0.35em;
@@ -48,3 +40,8 @@ export const Button = styled.button`
     background: #0066CC;
     color: white;
 `
+export const RowTest = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+`;

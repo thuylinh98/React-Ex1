@@ -36,8 +36,8 @@ render(){
   return(
     <Wrapper>
       <Row>
-          <img //style="border-color: green;border-radius: 10px;border-style: solid;border-radius: 50px" 
-          src= {this.state.avt} alt="avt"></img> 
+          <Img  
+          src= {this.state.avt} alt="avt"></Img> 
       </Row>
       <Row>
         <Text>{this.state.email}</Text>
@@ -51,9 +51,11 @@ render(){
       <Row>
         <Text>test not complete: {this.state.testNotComplete}</Text>
       </Row>
-      <Button onClick={() => this.logout()}>
-            Logout
-      </Button>
+      <Row>
+        <Button onClick={() => this.logout()}>
+              Logout
+        </Button>
+      </Row>
     </Wrapper>
   );
 }

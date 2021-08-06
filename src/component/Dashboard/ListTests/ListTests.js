@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   Wrapper, PopupLoginWrapper, Text, Row,
   Input, Button, Blank, Label, ColumnLeft,
-  ColumnRight, Img   
+  ColumnRight, Img, Column, RowTest,  
 } from './ListTestsStyle';
 import Test from './Test/Test';
 class ListTests extends Component{
@@ -29,15 +29,15 @@ render(){
   return(
     <Wrapper>
       <Row>
-        <ColumnLeft>
+        <Column>
           <Input type="search"
                 name="search"
                 required
                 value={this.state.search}
                 onChange={this.onChange}></Input>
           <Button onClick={() => this.goTo()}>Go to</Button>
-        </ColumnLeft>
-        <ColumnRight>
+        </Column>
+        <Column>
           <select name="sort"
                 required
                 value={this.state.sort}
@@ -46,9 +46,13 @@ render(){
             <option>Test Complete</option>
             <option>Test Not Complete</option>
           </select>
-        </ColumnRight>
+        </Column>
       </Row>
-      <Row><Test /></Row>
+      <RowTest>
+        <Test /><Test /><Test /><Test />
+        <Test /> <Test /><Test />
+        <Test /><Test /><Test />
+      </RowTest>
     </Wrapper>
   );
 }
