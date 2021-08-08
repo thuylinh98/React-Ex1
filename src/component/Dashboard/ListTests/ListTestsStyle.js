@@ -3,6 +3,7 @@ export const Wrapper = styled.section`
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
  `;
 
 export const Row = styled.div`
@@ -44,4 +45,18 @@ export const RowTest = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-content: space-around;
+    padding-top: 2em;
+`;
+export const RowNB = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+export const ButtonNB = styled.button`
+    width: 2em;
+    height: 2em;
+    background: white
+
+`;
+export const Text = styled.div`
 `;
