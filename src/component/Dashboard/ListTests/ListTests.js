@@ -35,8 +35,8 @@ class ListTests extends Component{
   }
   taodayso = ()=>{
     var arr = [];
-    var number=this.state.TestList.length%this.state.soluong;
-    if (this.state.TestList.length/this.state.soluong >=0) number++;
+    var number=this.state.TestList.length/this.state.soluong;
+    if (this.state.TestList.length%this.state.soluong >=0) number++;
     for (let i=1; i<number;i++){
       arr.push(i);
     }
@@ -44,6 +44,7 @@ class ListTests extends Component{
     return arr.map((element) => {
       return(
         <RowNB key={element}>
+      
         <ButtonNB  onClick={() => this.chuyenTrang(element)}>{element}</ButtonNB>
         </RowNB>
       )
@@ -57,10 +58,11 @@ class ListTests extends Component{
   search = (element) =>{
     var arr = [];
     for (let x of this.List){
-      if (x.name == element) 
+      if (x.name==( element)) 
         arr.push(x);
     }
-    this.setState({showTest: arr})
+    this.setState({TestList: arr, showTest: arr.slice(0,this.state.soluong)})
+    this.taodayso();
   };
   handleChange=(event)=>{
     var arr=[];
@@ -83,7 +85,8 @@ class ListTests extends Component{
           arr.push(x);
     }
     }
-    this.setState({TestList: arr})
+    this.setState({TestList: arr, showTest: arr.slice(0,this.state.soluong)})
+    this.taodayso();
     console.log("list",this.state.TestList)
   }
   List=[
@@ -128,7 +131,6 @@ render(){
           this.state.showTest.map(TestData =>
           <Test TestData={TestData} />) :  <Text>Không tìm thấy kết quả phù hợp</Text>
         }
-       
       </RowTest>
       <RowNB>{this.taodayso()}</RowNB>
     </Wrapper>
