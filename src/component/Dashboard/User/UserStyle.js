@@ -18,7 +18,8 @@ export const Img = styled.img`
     border-color: blue;
     border-style: solid;
     border-radius: 75%;
-    width: 75%;   
+    width: 75%;  
+    hight: 2em;
 `;
 export const Button = styled.button`
     width: 70%;

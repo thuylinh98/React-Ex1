@@ -30,7 +30,8 @@ class User extends Component{
   this.setState({ avt, email, point, testComplete,testNotComplete });
 }
 logout(){
-  console.log(this.state)
+  console.log(this.state);
+  window.location.replace('/login');
 }
 render(){
   return(

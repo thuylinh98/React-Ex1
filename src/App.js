@@ -3,25 +3,47 @@ import Log from './component/Log';
 import Login from './component/Login/Log';
 import Dashboard from './component/Dashboard/Dashboard';
 import User from './component/Dashboard/User/User';
+
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+  BrowserRouter, Switch,
+  Route, Redirect,
+} from 'react-router-dom';
+
+//style
+import styled from 'styled-components';
+export const Wrapper = styled.div`
+    width: 100vw;
+    height: 100vh;
+    color: blue;
+    font-size: 40px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: white;
+`;
+
+
+class NotFound extends Component{
+  render() {
+    return (
+      <Wrapper>
+        <div >#NOT FOUND</div>
+      </Wrapper>
+    )
+  }
+}
 class App extends Component{
 render(){
   return(
-    <Router> 
-      <div>
-        <Switch>
-          <Route path="/"> 
-            <Dashboard/>
-          </Route>
-          <Route path="/dashboard"> <User /> </Route>
-        </Switch>
-      </div>
-    </Router>
+    <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={Dashboard} />
+      <Route exact path="/login" component={Log} /> 
+      <Route component={NotFound} />
+    </Switch>
+</BrowserRouter>
 
   );
 }

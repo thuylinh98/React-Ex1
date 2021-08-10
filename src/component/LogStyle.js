@@ -10,7 +10,7 @@ export const Wrapper = styled.section`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: White;
+    background: white;
 `;
 export const PopupLoginWrapper = styled.div`
     width: 15em;

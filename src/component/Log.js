@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
+import StorageUtils from './StorageUtils';
 import {
     Wrapper, PopupLoginWrapper, Text, Row,
     Input, Button, Blank, Label, 
@@ -13,13 +14,26 @@ import {
   useLocation,
   useParams
 } from "react-router-dom";
+
+const defaultURL = "https://demo7405228.mockable.io/";
+
+const headers = {
+  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+  "Access-Control-Allow-Origin": "my-authorized-proxy-or-domain",
+  "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+}
+
+
 class Log extends Component{
     constructor(props) {
     super(props);
     this.state = {
       MSV: '',
       passWord: '',
-      rememberMe: false
+      rememberMe: false, 
+      persons: '',
+      baseUrl: null,
+      name: ''
     }
    
   }
@@ -28,6 +42,7 @@ class Log extends Component{
   const MSV = rememberMe ? localStorage.getItem('MSV') : '';
   const passWord = rememberMe ? localStorage.getItem('passWord') : '';
   this.setState({ MSV, passWord, rememberMe });
+  localStorage.setItem('token', '');
 }
   onChange=(event)=>{
     var target=event.target;
@@ -43,6 +58,7 @@ class Log extends Component{
  
     this.setState({ [input.name]: value });
   };
+
   login(){
     
     const { MSV, passWord, rememberMe } = this.state;
@@ -50,10 +66,35 @@ class Log extends Component{
     localStorage.setItem('MSV', rememberMe ? MSV : '');
     localStorage.setItem('passWord', rememberMe ? passWord : '');
 
+    //api
+      const params = {
+      MSV: this.state.MSV,
+      passWord: this.state.passWord,
+      rememberMe: this.state.rememberMe, 
+    };
+
+    axios.post(defaultURL+'login', {params})
+      .then(res => {
+        const persons = res.data;
+        this.setState({ persons });
+        if(params.MSV==persons.userName && params.passWord==persons.userId){
+          localStorage.setItem('token', persons.token);
+          localStorage.setItem('rememberMe', rememberMe);
+          localStorage.setItem('MSV', rememberMe ? MSV : '');
+          localStorage.setItem('passWord', rememberMe ? passWord : '');
+          window.location.replace('/');
+        }
+      })
+      .catch(error => console.log(error));
+
     if(!rememberMe){
-    this.onClear();}
-    console.log(this.state);
-    
+      this.onClear();}
+
+    console.log("getName",this.state.name);
+    console.log("url", defaultURL+'getName')
+    console.log("login", this.state.persons);
+    console.log("test",params)
+
   }
   onClear(){
     this.setState({
