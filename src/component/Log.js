@@ -17,11 +17,6 @@ import {
 
 const defaultURL = "https://demo7405228.mockable.io/";
 
-const headers = {
-  'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-  "Access-Control-Allow-Origin": "my-authorized-proxy-or-domain",
-  "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-}
 
 
 class Log extends Component{
@@ -75,23 +70,24 @@ class Log extends Component{
 
     axios.post(defaultURL+'login', {params})
       .then(res => {
-        const persons = res.data;
-        this.setState({ persons });
-        if(params.MSV==persons.userName && params.passWord==persons.userId){
-          localStorage.setItem('token', persons.token);
-          localStorage.setItem('rememberMe', rememberMe);
-          localStorage.setItem('MSV', rememberMe ? MSV : '');
-          localStorage.setItem('passWord', rememberMe ? passWord : '');
-          window.location.replace('/');
-        }
+        const code = res.data;
+          if(code === 503){ 
+            throw res
+          }else {
+            localStorage.setItem('token', code.token);
+            localStorage.setItem('userId', code.userId);
+            this.setState({ persons: code });
+            window.location.replace('/');
+          } 
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        const { message } = error;
+        console.log('error: ', message);
+      });
 
     if(!rememberMe){
       this.onClear();}
 
-    console.log("getName",this.state.name);
-    console.log("url", defaultURL+'getName')
     console.log("login", this.state.persons);
     console.log("test",params)
 

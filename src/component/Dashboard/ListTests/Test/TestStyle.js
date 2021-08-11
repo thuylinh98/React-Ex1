@@ -29,7 +29,7 @@ export const Button = styled.button`
     width:3em;
 `;
 export const I = styled.i`
-        color: white;
+        color: yellow;
         padding-top: 0.75em;
 
 `;

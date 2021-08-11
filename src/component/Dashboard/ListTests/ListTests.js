@@ -1,4 +1,5 @@
 import React, { Component, location } from 'react';
+import axios from 'axios';
 import {
   Wrapper, PopupLoginWrapper, Text, Row,
   Input, Button, Blank, Label, ColumnLeft,
@@ -10,6 +11,9 @@ const FILTER_VALUE = {
     complete: true,
     notComplete: false
   }
+
+const defaultURL ="https://611397b0cba40600170c1b16.mockapi.io/"
+
 class ListTests extends Component{
   constructor(props) {
     super(props);
@@ -20,21 +24,25 @@ class ListTests extends Component{
       testList: [],
       amount: 8, 
       page: 1,
-      list: [{name: 'Test 1',time: '1',point:'1',difficult: '1',evaluate: 1,status: true},
-            {name: 'Test 2',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 3',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 4',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 5',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 6',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 7',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 8',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 9',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
-            {name: 'Test 10',time: '1',point:'1',difficult: '1',evaluate: 0,status: true}]
+      list:[]
+      // list: [{name: 'Test 1',time: '1',point:'1',difficult: '1',evaluate: 1,status: true},
+      //       {name: 'Test 2',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 3',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 4',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 5',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 6',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 7',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 8',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 9',time: '1',point:'1',difficult: '1',evaluate: 0,status: false},
+      //       {name: 'Test 10',time: '1',point:'1',difficult: '1',evaluate: 0,status: true}]
     }
     this.handleChangeFilter = this.handleChangeFilter.bind(this);
   }
   componentDidMount() {
-    this.setState({showTest: this.state.list.slice(0,this.state.amount), testList: this.state.list});
+    const id = localStorage.getItem('userId');
+    this.getList(id);
+    //console.log("test", this.state.list)
+    //this.setState({showTest: this.state.list.slice(0,this.state.amount), testList: this.state.list});
   }
   onChangeInput=(event)=>{
     const { name, value} = event.target;
@@ -43,9 +51,9 @@ class ListTests extends Component{
     })
   }
   goTo(){
-    console.log(this.state);
     this.search(this.state.search);
-    console.log(this.state.showTest)
+    //let test = this.getList(44);
+    //console.log(this.state)
   }
   listPage = ()=>{
     var arr = [];
@@ -54,7 +62,6 @@ class ListTests extends Component{
     for (let i=1; i<number;i++){
       arr.push(i);
     }
-    console.log(this.state.amount);
     return arr.map((element) => {
       return(
         <RowNB key={element}>
@@ -66,7 +73,6 @@ class ListTests extends Component{
   nextPage = (number) =>{
     var end = this.state.amount*number;
     this.setState({showTest: this.state.testList.slice(end-8,end), page: number})
-    console.log("number",this.page)
   };
   search = (element) =>{
     var arr = [];
@@ -79,7 +85,6 @@ class ListTests extends Component{
   };
   handleChangeFilter=(event)=>{
     const {value}=event.target;
-    console.log( 'value = ', value, typeof(value));
     this.setState({sort: value});
     
     const {list} = this.state;
@@ -90,9 +95,28 @@ class ListTests extends Component{
 
     this.setState({testList: arr, showTest: arr.slice(0,this.state.amount)})
     this.listPage();
-    console.log("list",arr);
   }
-  
+  // api
+  getList = (id) => this.getTestData(`listTest/tests?userId=${id}`);
+  getTestData = (id)=>{ 
+    const url = defaultURL + id;
+    axios.get(url)
+      .then(res => {
+        const code = res.data;
+         if(code === 503){ 
+            throw res
+          }else {
+            this.setState({showTest: code[0].test.slice(0,this.state.amount), testList: code[0].test});
+            //return code[0].test;
+          } 
+      })
+      .catch((error) => {
+        const { message } = error;
+        console.log('error: ', message);
+      });
+      console.log("test",this.state.list)
+      console.log(url)
+  }
 render(){
   return(
     <Wrapper>

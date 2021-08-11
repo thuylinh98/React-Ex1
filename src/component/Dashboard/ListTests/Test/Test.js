@@ -4,6 +4,8 @@ import {
     Input, Button, Blank, Label, Column, Img, I
 } from './TestStyle';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
+
 class ListTests extends Component{
   constructor(props) {
     super(props);
@@ -17,7 +19,20 @@ class ListTests extends Component{
     }
   }
   start(){
-    console.log();
+    console.log(this.props.TestData);
+   // this.getStar(this.props.TestData.evaluate);
+  }
+  getStar(number){
+    let arr =[];
+    for (let i=0; i<number;i++){
+      arr.push(i);
+    }
+    console.log(arr)
+    return arr.map((element) => {
+      return(
+        <I className="fas fa-star"></I>
+      )
+    });
   }
 render(){
   const {TestData}=this.props
@@ -42,11 +57,7 @@ render(){
       </Row>
       <Row>
         <Column>       
-          <I className="fas fa-star"></I>
-          <I className="fas fa-star"></I>
-          <I className="fas fa-star"></I>
-          <I className="fas fa-star"></I>
-          <I className="fas fa-star"></I>
+          {this.getStar(this.props.TestData.evaluate)}
         </Column>
       </Row>
     </Wrapper>
