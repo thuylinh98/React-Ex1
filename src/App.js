@@ -3,6 +3,7 @@ import Log from './component/Log';
 import Login from './component/Login/Log';
 import Dashboard from './component/Dashboard/Dashboard';
 import User from './component/Dashboard/User/User';
+import Testing from './component/Testing/Testing';
 
 import {
   BrowserRouter, Switch,
@@ -41,6 +42,7 @@ render(){
     <Switch>
       <Route exact path="/" component={Dashboard} />
       <Route exact path="/login" component={Log} /> 
+      <Route exact path="/Testing" component={Testing} />
       <Route component={NotFound} />
     </Switch>
 </BrowserRouter>

@@ -40,7 +40,7 @@ class ListTests extends Component{
   }
   componentDidMount() {
     const id = localStorage.getItem('userId');
-    this.getList(id);
+    this.fetchList(id);
     //console.log("test", this.state.list)
     //this.setState({showTest: this.state.list.slice(0,this.state.amount), testList: this.state.list});
   }
@@ -72,7 +72,7 @@ class ListTests extends Component{
   };
   nextPage = (number) =>{
     var end = this.state.amount*number;
-    this.setState({showTest: this.state.testList.slice(end-8,end), page: number})
+    this.setState({showTest: this.state.testList.slice(end-this.state.amount,end), page: number})
   };
   search = (element) =>{
     var arr = [];
@@ -97,8 +97,8 @@ class ListTests extends Component{
     this.listPage();
   }
   // api
-  getList = (id) => this.getTestData(`listTest/tests?userId=${id}`);
-  getTestData = (id)=>{ 
+  fetchList = (id) => this.fetchTestData(`listTest/tests?userId=${id}`);
+  fetchTestData = (id)=>{ 
     const url = defaultURL + id;
     axios.get(url)
       .then(res => {

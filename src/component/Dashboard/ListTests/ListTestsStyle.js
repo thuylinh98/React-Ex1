@@ -4,6 +4,7 @@ export const Wrapper = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 10px 10px 10px 10px;
  `;
 
 export const Row = styled.div`
@@ -16,6 +17,7 @@ export const Row = styled.div`
     align-items: flex-start;
     align-items: baseline;
     justify-content: space-between;
+        padding: 0 30px 20px 0;
 `;
 export const Column = styled.div`    
 `;
@@ -46,6 +48,8 @@ export const RowTest = styled.div`
     flex-wrap: wrap;
     align-content: space-around;
     padding-top: 2em;
+    justify-content: center;
+    padding: 0 8% 3% 3%;
 `;
 export const RowNB = styled.div`
     display: flex;

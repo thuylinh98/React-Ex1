@@ -18,16 +18,20 @@ class ListTests extends Component{
       status: false
     }
   }
+  componentDidMount(){
+    localStorage.setItem('testing','');
+  }
   start(){
-    console.log(this.props.TestData);
+    //console.log(this.props.TestData);
+    localStorage.setItem('testing', JSON.stringify(this.props.TestData));
    // this.getStar(this.props.TestData.evaluate);
+    window.location.replace('/testing');
   }
   getStar(number){
     let arr =[];
     for (let i=0; i<number;i++){
       arr.push(i);
     }
-    console.log(arr)
     return arr.map((element) => {
       return(
         <I className="fas fa-star"></I>
